@@ -168,11 +168,13 @@
                 if (checkWinner()) {
                     document.getElementById('endMessage').textContent = currentPlayer === 'X' ? '¡Ganaste!' : '¡Perdiste! Intentá nuevamente';
                     document.getElementById('endScreen').style.display = 'block';
+                    disableCells(); // Deshabilitar celdas al final del juego
                     return;
                 }
                 if (checkDraw()) {
                     document.getElementById('endMessage').textContent = '¡Es un empate!';
                     document.getElementById('endScreen').style.display = 'block';
+                    disableCells(); // Deshabilitar celdas al final del juego
                     return;
                 }
                 currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
@@ -182,7 +184,7 @@
                     setTimeout(() => {
                         computerMove();
                         hideNotification();
-                    }, 1500); // Espera dos segundos antes de que la computadora haga su movimiento
+                    }, 1500); // Espera un segundo antes de que la computadora haga su movimiento
                 }
             }
         }
@@ -234,6 +236,9 @@
                 }
             }
             document.getElementById('endScreen').style.display = 'none';
+            document.getElementById('board').style.display = 'block'; // Mostrar el tablero
+            document.getElementById('startScreen').style.display = 'none'; // Ocultar la pantalla de inicio
+            enableCells(); // Habilitar las celdas
         }
 
         function computerMove() {
@@ -253,11 +258,13 @@
             if (checkWinner()) {
                 document.getElementById('endMessage').textContent = '¡Perdiste! Intentá nuevamente';
                 document.getElementById('endScreen').style.display = 'block';
+                disableCells(); // Deshabilitar celdas al final del juego
                 return;
             }
             if (checkDraw()) {
                 document.getElementById('endMessage').textContent = '¡Es un empate!';
                 document.getElementById('endScreen').style.display = 'block';
+                disableCells(); // Deshabilitar celdas al final del juego
                 return;
             }
             currentPlayer = 'X';
